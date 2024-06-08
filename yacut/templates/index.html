@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+YaCut - укоротитель ссылок
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center"><span style="color:red">Ya</span>Cut</h1>
+<p class="text-center my-4">
+  Создайте короткую ссылку автоматически или предложите свой вариант
+</p>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div>
+  {% for category, message in messages %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+  <div class="row my-3">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <form method="POST" action="/">
+        {{ form.hidden_tag() }}
+        <div>
+          <div>
+            <input type="text" class="form-control form-control-lg py-2 mb-3" id="form-title" name="original_link"
+              placeholder="Длинная ссылка">
+            {% if form.original_link.errors %}
+            <p><span style="color:red">{{ form.original_link.errors[0] }}</span></p>
+            {% endif %}
+          </div>
+          <div>
+            <input type="url" class="form-control form-control-lg py-2 mb-3" id="form-link" name="custom_id"
+              placeholder="Ваш вариант короткой ссылки">
+            {% if form.custom_id.errors %}
+            <p><span style="color:red">{{ form.custom_id.errors[0] }}</span></p>
+            {% endif %}
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Создать">
+        </div>
+      </form>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
+
+{% if short_link %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    </div>
+    <div class="col-sm">
+      <p class="text-center">
+        <h5 class="text-center">Ваша короткая ссылка:</h5>
+        <a href="{{ short_link }}">{{ short_link }}</a>
+      </p>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
