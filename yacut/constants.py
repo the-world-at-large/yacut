@@ -1,0 +1,1 @@
+SHORT_ID_LENGTH = 6
