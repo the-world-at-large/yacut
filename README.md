@@ -83,13 +83,12 @@ Content-Type: application/json
     "short_link": "http://127.0.0.1:5000/custom123",
     "url": "http://example.com"
 }
-
+```
 
 ## Тестирование
 Для запуска тестов используйте *pytest*:
 
-```pytest
-```
+```pytest```
 
 ## Автор
 
