@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, request
 
 from . import app
+from .constants import INDEX_TEMPLATE
 from .error_handlers import InvalidAPIUsage
 from .forms import URLForm
 from .services import create_short_url_service, get_original_url_service
@@ -18,11 +19,11 @@ def index():
                                                          custom_id)
         except ValueError as e:
             flash(str(e), 'error')
-            return render_template('index.html', form=form)
+            return render_template(INDEX_TEMPLATE, form=form)
 
         return render_template(
-            'index.html', form=form, short_link=request.host_url + short_id)
-    return render_template('index.html', form=form)
+            INDEX_TEMPLATE, form=form, short_link=request.host_url + short_id)
+    return render_template(INDEX_TEMPLATE, form=form)
 
 
 @app.route('/<short_id>')
